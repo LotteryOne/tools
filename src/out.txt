@@ -1,0 +1,32 @@
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5662, '2001');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5702, '2002');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5802, '2003');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5962, '2004');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5962, '2005');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5962, '2006');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5962, '2007');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5962, '2008');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5962, '2009');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 5962, '2011');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 6000, '2010');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 6200, '2012');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 6300, '2013');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 6500, '2014');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 6600, '2015');
+insert into CHART_ORGAN_BED (AREA, BED, YEAR)
+values ('虹口区', 6789, '20166');

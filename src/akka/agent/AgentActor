@@ -1,0 +1,65 @@
+package four;
+
+
+import akka.actor.*;
+import akka.agent.Agent;
+import akka.dispatch.ExecutionContexts;
+import akka.dispatch.Futures;
+import akka.dispatch.OnComplete;
+import com.typesafe.config.ConfigFactory;
+import scala.Function1;
+import scala.concurrent.Future;
+import scala.concurrent.duration.Duration;
+import scala.runtime.BoxedUnit;
+
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by BlueSky on 2/16/2017.
+ */
+public class AgentActor {
+
+    public static Agent<Integer> countAgent = Agent.create(0, ExecutionContexts.global());
+
+    static ConcurrentLinkedQueue<Future<Integer>> futures = new ConcurrentLinkedQueue<>();
+
+
+    public static void main(String[] args) {
+        ActorSystem system = ActorSystem.create("agent", ConfigFactory.load("sampleConf.conf"));
+        ActorRef counter[] = new ActorRef[10];
+        for (int i = 0; i < 10; i++) {
+            counter[i] = system.actorOf(Props.create(CounterActor.class), "counter_" + i);
+        }
+
+        final Inbox inbox = Inbox.create(system);
+        for (int i = 0; i < 10; i++) {
+            inbox.send(counter[i], 1);
+            inbox.watch(counter[i]);
+        }
+
+        int closeCounter = 0;
+
+        while (true) {
+            Object msg = inbox.receive(Duration.create(1, TimeUnit.SECONDS));
+            if (msg instanceof Terminated) {
+                closeCounter++;
+                if (closeCounter == counter.length) {
+                    break;
+                }
+            } else {
+                System.out.println(msg);
+
+            }
+
+        }
+        Futures.sequence(futures, system.dispatcher()).onComplete(new OnComplete<Iterable<Integer>>() {
+            @Override
+            public void onComplete(Throwable failure, Iterable<Integer> success) throws Throwable {
+                System.out.println("countAgent=" + countAgent.get());
+                system.shutdown();
+            }
+
+        }, system.dispatcher());
+    }
+}
